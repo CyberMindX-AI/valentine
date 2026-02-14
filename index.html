@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Valentine's Animation</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@600&family=Great+Vibes&family=Montserrat:wght@400;600;800&family=Caveat:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Background Music -->
+    <audio id="bgMusic" loop autoplay>
+        <!-- User must download All of Me and save as song.mp3 -->
+        <source src="song.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="music-control" id="musicBtn">🎵</div>
+
+    <div class="screen-container">
+        <!-- Animation Scene (Previous) -->
+        <div class="scene" id="mainScene">
+            <!-- Stage 1: Scattered Hearts (Initial State) -->
+            <div class="scattered-heart heart-1">
+                <svg viewBox="0 0 32 32" fill="currentColor">
+                    <path
+                        d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-11.8,16-21.2C32,3.8,28.2,0,23.6,0z" />
+                </svg>
+            </div>
+            <div class="scattered-heart heart-2">
+                <svg viewBox="0 0 32 32" fill="currentColor">
+                    <path
+                        d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-11.8,16-21.2C32,3.8,28.2,0,23.6,0z" />
+                </svg>
+            </div>
+            <div class="scattered-heart heart-3">
+                <svg viewBox="0 0 32 32" fill="currentColor">
+                    <path
+                        d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-11.8,16-21.2C32,3.8,28.2,0,23.6,0z" />
+                </svg>
+            </div>
+
+            <!-- Stage 2: Final Connected Hearts -->
+            <div class="final-composition">
+                <!-- Left Solid Heart -->
+                <div class="main-heart solid">
+                    <svg viewBox="0 0 32 32" fill="currentColor">
+                        <path
+                            d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-11.8,16-21.2C32,3.8,28.2,0,23.6,0z" />
+                    </svg>
+                </div>
+
+                <!-- Right Scribble Heart (Interlocking) -->
+                <div class="main-heart scribble">
+                    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path class="scribble-path" d="M30 40 C 30 10, 80 10, 80 40 C 80 70, 50 85, 20 85" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Stage 3: Text Message -->
+            <div class="text-container">
+                <div class="message-wrapper">
+                    <div class="happy-text">HAPPY</div>
+                    <div class="valentine-text">Valentine</div>
+                </div>
+
+                <div class="footer-row">
+                    <div class="love-text">I LOVE YOU <span class="heart-icon">♥</span></div>
+                    <div class="next-button" id="nextBtn" onclick="playMusic()">Next</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: Passcode Screen -->
+        <div class="passcode-screen" id="passcodeScreen">
+            <div class="passcode-content">
+                <h2 class="passcode-title">Enter Passcode</h2>
+
+                <div class="dots-container">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+
+                <div class="passcode-hint">Hint: My favourite word 🤫</div>
+
+                <div class="keypad">
+                    <div class="key-row">
+                        <div class="key" data-key="1">1</div>
+                        <div class="key" data-key="2">2</div>
+                        <div class="key" data-key="3">3</div>
+                    </div>
+                    <div class="key-row">
+                        <div class="key" data-key="4">4</div>
+                        <div class="key" data-key="5">5</div>
+                        <div class="key" data-key="6">6</div>
+                    </div>
+                    <div class="key-row">
+                        <div class="key" data-key="7">7</div>
+                        <div class="key" data-key="8">8</div>
+                        <div class="key" data-key="9">9</div>
+                    </div>
+                    <div class="key-row">
+                        <div class="key empty"></div>
+                        <div class="key" data-key="0">0</div>
+                        <div class="key empty"></div>
+                    </div>
+                </div>
+
+                <div class="passcode-footer">
+                    <div class="footer-action" id="goBack">Go back</div>
+                    <div class="footer-action" id="deleteKey">Delete</div>
+                </div>
+            </div>
+
+            <!-- POPUP MESSAGE -->
+            <div class="popup-overlay" id="valentinePopup">
+                <div class="popup-content">
+                    <h3>Dearest Praise ❤️</h3>
+                    <p>Our first Valentine means the world to me. I'm so lucky to have you!</p>
+                    <button class="close-popup" id="closePopupBtn">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: Timer Screen (Hidden Initially) -->
+        <div class="timer-screen" id="timerScreen">
+            <div class="timer-content">
+                <h2 class="timer-header">Since the day our story took a turn it's been...</h2>
+
+                <div class="timer-display">
+                    <div class="time-unit">
+                        <span class="number" id="days">0</span>
+                        <span class="label">Days</span>
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="time-unit">
+                        <span class="number" id="hours">0</span>
+                        <span class="label">Hours</span>
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="time-unit">
+                        <span class="number" id="minutes">0</span>
+                        <span class="label">Minutes</span>
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="time-unit">
+                        <span class="number" id="seconds">0</span>
+                        <span class="label">Seconds</span>
+                    </div>
+                </div>
+
+                <div class="timer-footer">... and still counting ♥</div>
+
+                <div class="cute-character">
+                    <svg viewBox="0 0 100 100" class="walking-heart">
+                        <!-- Heart Body -->
+                        <path d="M50 85 C10 50 10 15 50 35 C90 15 90 50 50 85" fill="#FFD700" />
+                        <!-- Face -->
+                        <circle cx="35" cy="45" r="3" fill="#333" />
+                        <circle cx="65" cy="45" r="3" fill="#333" />
+                        <path d="M40 55 Q50 60 60 55" stroke="#333" stroke-width="2" fill="none" />
+                        <!-- Arms -->
+                        <path d="M20 50 Q10 40 15 30" stroke="#FFD700" stroke-width="3" stroke-linecap="round"
+                            fill="none" />
+                        <path d="M80 50 Q90 40 85 30" stroke="#FFD700" stroke-width="3" stroke-linecap="round"
+                            fill="none" />
+                        <!-- Legs (Animated via CSS) -->
+                        <path class="leg left-leg" d="M40 80 L35 95" stroke="#FFD700" stroke-width="4"
+                            stroke-linecap="round" />
+                        <path class="leg right-leg" d="M60 80 L65 95" stroke="#FFD700" stroke-width="4"
+                            stroke-linecap="round" />
+                    </svg>
+                </div>
+
+                <div class="next-button" id="timerNextBtn" style="margin-top: auto;">Next</div>
+            </div>
+        </div>
+
+        <!-- NEW: Envelope Screen (Hidden Initially) -->
+        <div class="envelope-screen" id="envelopeScreen">
+            <div class="envelope-content">
+                <h2 class="envelope-header">Happy Valentine Baby ❤️</h2>
+
+                <div class="envelope-container" id="envelopeContainer">
+                    <div class="envelope-wrapper">
+                        <div class="envelope" id="envelope">
+                            <div class="flap"></div>
+                            <div class="pocket"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tap-hint" id="tapToOpen">TAP TO OPEN</div>
+            </div>
+        </div>
+
+        <!-- NEW: Scroll Screen (Replaces Flower Screen) -->
+        <div class="scroll-screen" id="scrollScreen">
+            <div class="scroll-container">
+                <!-- Top Roller -->
+                <div class="scroll-roller top-roller"></div>
+
+                <!-- The Paper Scroll -->
+                <div class="scroll-paper">
+                    <div class="scroll-content">
+                        <h2>My Dearest Praise, 👑</h2>
+                        <div class="typing-container">
+                            <p id="typingMessage"></p>
+                            <span class="cursor">|</span>
+                        </div>
+                        <div class="signature">- Always Yours ❤️</div>
+                    </div>
+                </div>
+
+                <!-- Bottom Roller -->
+                <div class="scroll-roller bottom-roller"></div>
+            </div>
+
+            <!-- Final Closing Message -->
+            <div class="final-message" id="finalMessage">
+                <h1>Oluwadarasimi wishes you<br>Happy Valentine<br>and loves you ❤️</h1>
+                <button class="restart-btn" onclick="location.reload()">Replay ↺</button>
+            </div>
+
+            <button class="restart-btn" id="restartBtn" onclick="location.reload()" style="display: none;">Replay
+                ↺</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
